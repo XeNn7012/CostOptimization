@@ -1,3 +1,8 @@
+
+
+
+
+
 class Data_Refined():
     def __init__(self,machines,c):
         self.c=c
@@ -104,11 +109,12 @@ China={
     "8XLarge":{"cost":1180,"making_units":160},
     "10XLarge":{"cost":None,"making_units":320},
     }
+
+n=int(input())
     
-    
-c=Data_Refined(NewYork,1150)
+c=Data_Refined(NewYork,n)
 print(c.split_the_parts())
-c2=Data_Refined(India,1150)
+c2=Data_Refined(India,n)
 print(c2.split_the_parts())
-c3=Data_Refined(China,1150)
+c3=Data_Refined(China,n)
 print(c3.split_the_parts())
