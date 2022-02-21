@@ -25,7 +25,7 @@ class Data_Refined():
                         cost.append(j[value])
                 else:
                     making_units.append(j[value])
-        i,j=0,6
+        i=0
         y=[]
         record_number=[]
         serial_number=0
