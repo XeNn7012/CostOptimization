@@ -62,13 +62,6 @@ class Data_Refined():
             optimum=sum(tcost)
         region=""
         Machine_type=["10XLarge","8XLarge","4XLarge","2XLarge","XLarge","Large"]
-        regions=["NewYork","India","China"]
-        if cost[0]==2820:
-            region="NewYork"
-        elif cost[0]==2970:
-            region="India"
-        elif cost[0]==0:
-            region="China"
         sorted_machine=[]
         for ele in sorted(record_number, reverse = True):
             sorted_machine.append(Machine_type[ele])
