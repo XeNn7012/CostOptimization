@@ -26,7 +26,7 @@ class Data_Refined():
                 else:
                     making_units.append(j[value])
         i=0
-        y=[]
+        
         record_number=[]
         serial_number=0
         temp=self.c
@@ -43,7 +43,7 @@ class Data_Refined():
                     quoitent=temp//making_units[i]
                     temp=temp%making_units[i]
                     quoitent_storage.append(quoitent)
-                    y.append(temp)
+                    
   
                     combined_quoitent_storage.append(quoitent*making_units[i])
                     record_number.append(serial_number)
