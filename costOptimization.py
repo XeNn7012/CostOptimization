@@ -110,7 +110,7 @@ China={
     "10XLarge":{"cost":None,"making_units":320},
     }
 
-n=int(input())
+n=int(input("Number of units required: "))
     
 c=Data_Refined(NewYork,n)
 print(c.split_the_parts())
