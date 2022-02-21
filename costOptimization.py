@@ -1,13 +1,9 @@
-
-
-
-
-
 class Data_Refined():
-    def __init__(self,machines,c):
+    def __init__(self,machines,c,h,country):
         self.c=c
         self.machines=machines
-        
+        self.h=h
+        self.country=country
     def calc(self,c1,price):
         cost=[]
         cost=(c1*price)
@@ -15,20 +11,24 @@ class Data_Refined():
     
     
     def split_the_parts(self):
-        tcost,cost,making_units,combined_quoitent_storage,quoitent_storage,sorted_cost=[],[],[],[],[],[]
+        tcost,cost,making_units,combined_quoitent_storage,quoitent_storage,making_units_old,cost_old,sorted_cost=[],[],[],[],[],[],[],[]
         for i,j in self.machines.items():
             for value in j:
                 if value=="cost":
-                    if j[value] ==None:
-                        cost.append(0)
+                    if j[value] =="":
+                        cost_old.append(0)
                     else:
-                        cost.append(j[value])
+                        cost_old.append(j[value])
                 else:
-                    making_units.append(j[value])
-        i=0
+                    making_units_old.append(j[value])
         
+        for i in range(len(making_units_old)):
+            making_units.append(making_units_old[i]/self.h)
+            cost.append(cost_old[i]/self.h)
+
         record_number=[]
         serial_number=0
+        i=0
         temp=self.c
         cost.reverse()
         making_units.reverse()
@@ -79,8 +79,8 @@ class Data_Refined():
                 machine_cost[key] = value
                 sorted_cost.remove(value)
                 break 
-        print("{"+"\n   \"region\":{0},\n   \"total_cost\":{1},\
-        \n   \"machines\":[\n".format(region,optimum)+"  ",("\n   ".join(("["+key+":"+str(value)+"]") for key,value in machine_cost.items())),"\t \n] \n}")
+        (print("{"+"\n   \"region\":{0},\n   \"total_cost\":{1},\
+        \n   \"machines\":[\n".format(self.country,optimum)+"  ",("\n   ".join(("["+key+":"+str(value)+"]") for key,value in machine_cost.items())),"\t \n] \n}"))
 
 
  
@@ -95,7 +95,7 @@ NewYork={
     
 India={
     "Large":{"cost":140,"making_units":10},
-    "XLarge":{"cost":None,"making_units":20},
+    "XLarge":{"cost":0,"making_units":20},
     "2XLarge":{"cost":413,"making_units":40},
     "4XLarge":{"cost":890,"making_units":80},
     "8XLarge":{"cost":1300,"making_units":160},
@@ -104,17 +104,20 @@ India={
 China={
     "Large":{"cost":110,"making_units":10},
     "XLarge":{"cost":200,"making_units":20},
-    "2XLarge":{"cost":None,"making_units":40},
+    "2XLarge":{"cost":0,"making_units":40},
     "4XLarge":{"cost":670,"making_units":80},
     "8XLarge":{"cost":1180,"making_units":160},
-    "10XLarge":{"cost":None,"making_units":320},
+    "10XLarge":{"cost":0,"making_units":320},
     }
 
 n=int(input("Number of units required: "))
-    
-c=Data_Refined(NewYork,n)
-print(c.split_the_parts())
-c2=Data_Refined(India,n)
-print(c2.split_the_parts())
-c3=Data_Refined(China,n)
-print(c3.split_the_parts())
+h=int(input("Hours: "))
+
+
+c=Data_Refined(NewYork,n,h,country="NewYork")
+c.split_the_parts()
+c2=Data_Refined(India,n,h,country="India")
+c2.split_the_parts()
+c3=Data_Refined(China,n,h,country="China")
+c3.split_the_parts()
+
