@@ -26,7 +26,7 @@ class Data_Refined():
                 else:
                     making_units.append(j[value])
         i,j=0,6
-        y,xx=[],[]
+        y=[]
         record_number=[]
         serial_number=0
         temp=self.c
@@ -44,7 +44,7 @@ class Data_Refined():
                     temp=temp%making_units[i]
                     quoitent_storage.append(quoitent)
                     y.append(temp)
-                    xx.append(making_units[i])
+  
                     combined_quoitent_storage.append(quoitent*making_units[i])
                     record_number.append(serial_number)
                     serial_number+=1
@@ -79,8 +79,8 @@ class Data_Refined():
                 machine_cost[key] = value
                 sorted_cost.remove(value)
                 break 
-        print("  {"+"\n   \"region\":{0},\n   \"total_cost\":{1},\
-        \n   \"machines\":[\n".format(region,optimum)+"    [\n",("\n  ".join((key+":"+str(value)) for key,value in machine_cost.items())),"\n]")
+        print("{"+"\n   \"region\":{0},\n   \"total_cost\":{1},\
+        \n   \"machines\":[\n".format(region,optimum)+"  ",("\n   ".join(("["+key+":"+str(value)+"]") for key,value in machine_cost.items())),"\t \n] \n}")
 
 
  
