@@ -23,7 +23,7 @@ class Data_Refined():
                     making_units_old.append(j[value])
         
         for i in range(len(making_units_old)):
-            making_units.append(making_units_old[i]/self.h)
+            making_units.append(making_units_old[i])
             cost.append(cost_old[i]/self.h)
 
         record_number=[]
