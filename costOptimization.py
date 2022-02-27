@@ -8,10 +8,11 @@ class Data_Refined():
         cost=[]
         cost=(c1*price)
         return cost    
-    
-    
+       
     def split_the_parts(self):
-        tcost,cost,making_units,combined_quoitent_storage,quoitent_storage,making_units_old,cost_old,sorted_cost=[],[],[],[],[],[],[],[]
+        region=""
+        machine_cost = {}
+        tcost,cost,making_units,quoitent_storage,cost_old,sorted_costrecord_number,sorted_machine=[],[],[],[],[],[],[],[]
         for i,j in self.machines.items():
             for value in j:
                 if value=="cost":
@@ -20,13 +21,10 @@ class Data_Refined():
                     else:
                         cost_old.append(j[value])
                 else:
-                    making_units_old.append(j[value])
+                    making_units.append(j[value])
         
-        for i in range(len(making_units_old)):
-            making_units.append(making_units_old[i])
+        for i in range(len(cost_old)):
             cost.append(cost_old[i]/self.h)
-
-        record_number=[]
         serial_number=0
         i=0
         temp=self.c
@@ -49,10 +47,10 @@ class Data_Refined():
                     record_number.append(serial_number)
                     serial_number+=1
                     i+=1
- 
             else:
                 serial_number+=1
                 pass
+            
         cost.pop(6)
         for ele in sorted(record_number, reverse = True):
             sorted_cost.append(cost[ele])
@@ -60,13 +58,10 @@ class Data_Refined():
         for i in range(len(quoitent_storage)):
             tcost.append(self.calc(quoitent_storage[i],sorted_cost[i]))
             optimum=sum(tcost)
-        region=""
         Machine_type=["10XLarge","8XLarge","4XLarge","2XLarge","XLarge","Large"]
-        sorted_machine=[]
         for ele in sorted(record_number, reverse = True):
             sorted_machine.append(Machine_type[ele])
         sorted_machine.reverse()    
-        machine_cost = {}
         for key in sorted_machine:
             for value in sorted_cost:
                 machine_cost[key] = value
