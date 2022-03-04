@@ -1,8 +1,3 @@
-
-# for ele in sorted(record_number, reverse = True):
-#         sorted_cost.append(cost[ele])
-
-# sorted_cost=[cost[ele] for i in sorted(record_number,reverse=True)]
 class Data_Refined():
     def __init__(self,machines,c,h,country):
         self.c=c
