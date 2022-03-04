@@ -1,3 +1,8 @@
+
+# for ele in sorted(record_number, reverse = True):
+#         sorted_cost.append(cost[ele])
+
+# sorted_cost=[cost[ele] for i in sorted(record_number,reverse=True)]
 class Data_Refined():
     def __init__(self,machines,c,h,country):
         self.c=c
@@ -12,7 +17,7 @@ class Data_Refined():
     def split_the_parts(self):
         region=""
         machine_cost = {}
-        tcost,cost,making_units,quoitent_storage,cost_old,sorted_costrecord_number,sorted_machine=[],[],[],[],[],[],[],[]
+        tcost,cost,making_units,quoitent_storage,cost_old,sorted_cost,record_number,sorted_machine=[],[],[],[],[],[],[],[]
         for i,j in self.machines.items():
             for value in j:
                 if value=="cost":
@@ -41,9 +46,6 @@ class Data_Refined():
                     quoitent=temp//making_units[i]
                     temp=temp%making_units[i]
                     quoitent_storage.append(quoitent)
-                    
-  
-                    combined_quoitent_storage.append(quoitent*making_units[i])
                     record_number.append(serial_number)
                     serial_number+=1
                     i+=1
@@ -52,16 +54,10 @@ class Data_Refined():
                 pass
             
         cost.pop(6)
-        for ele in sorted(record_number, reverse = True):
-            sorted_cost.append(cost[ele])
-        sorted_cost.reverse() 
-        for i in range(len(quoitent_storage)):
-            tcost.append(self.calc(quoitent_storage[i],sorted_cost[i]))
-            optimum=sum(tcost)
+        sorted_cost=[cost[i] for i in sorted(record_number,reverse=True)]
+        optimum=sum(map(self.calc,quoitent_storage,sorted_cost))
         Machine_type=["10XLarge","8XLarge","4XLarge","2XLarge","XLarge","Large"]
-        for ele in sorted(record_number, reverse = True):
-            sorted_machine.append(Machine_type[ele])
-        sorted_machine.reverse()    
+        sorted_machine=[Machine_type[i] for i in sorted(record_number,reverse=True)]
         for key in sorted_machine:
             for value in sorted_cost:
                 machine_cost[key] = value
@@ -69,8 +65,7 @@ class Data_Refined():
                 break 
         (print("{"+"\n   \"region\":{0},\n   \"total_cost\":{1},\
         \n   \"machines\":[\n".format(self.country,optimum)+"  ",("\n   ".join(("["+key+":"+str(value)+"]") for key,value in machine_cost.items())),"\t \n] \n}"))
-
-
+ 
  
 NewYork={
     "Large":{"cost":120,"making_units":10},
